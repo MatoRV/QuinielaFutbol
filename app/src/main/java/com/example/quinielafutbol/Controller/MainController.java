@@ -27,15 +27,16 @@ public class MainController {
         return mySingleController;
     }
 
+    // Envía los datos al View
     public List<Quiniela> getDataFromHttp() {
         return this.dataRequested;
     }
-
+    // Es llamado en el View
     public void requestDataFromHttp() {
         Peticion p = new Peticion();
         p.requestData(URL);
     }
-
+    // Es llamado cuando onResponse está correcto
     public void setDataFromHttp(String html) {
         Respuesta answer = new Respuesta(html);
         dataRequested = answer.getData();

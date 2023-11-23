@@ -8,8 +8,10 @@ public class Quiniela {
 
     private String resultado;
 
-    public Quiniela() {
-
+    public Quiniela(String local, String visitante, String resultado) {
+        this.local = local;
+        this.visitante = visitante;
+        this.resultado = resultado;
     }
 
     public String getLocal() {

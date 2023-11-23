@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // Marca el RecyclerView
         mRecyclerView = findViewById(R.id.rv_quiniela);
-
+        // Declara el adaptador del RecyclerView
         mAdapter = new QuinielaAdapter(this,mList);
 
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        // Pide los datos
         MainController.getSingleton().requestDataFromHttp();
 
         MainActivity.myActiveActivity = this;
@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void accessData() {
+        // Carga los datos en una lista
         List<Quiniela> lista = MainController.getSingleton().getDataFromHttp();
+        // Actualiza la lista
         mList.clear();
         for (Quiniela q : lista) {
             mList.add(q);

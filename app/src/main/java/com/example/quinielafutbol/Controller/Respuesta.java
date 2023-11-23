@@ -21,39 +21,31 @@ public class Respuesta {
 
     public List<Quiniela> getData() {
         LinkedList<Quiniela> dataList = new LinkedList<>();
-        Quiniela quiniela = new Quiniela();
+        // Accede a la url
         Document document = Jsoup.parse(this.datos);
+        // Busca un div con class="cuerpoRegionLeft"
         Element equipos = document.selectFirst("div.cuerpoRegionLeft");
+        // Busca un div con class="cuerpoRegionRight"
         Element resultados = document.selectFirst("div.cuerpoRegionRight");
-        //Verifica si el elemento existe
         if (equipos != null) {
+            // Obtiene los datos de la etiqueta <ul> en la posicion 2
             Element listaLocales = equipos.select("ul").get(1);
-            if (listaLocales != null) {
-                Elements locales = listaLocales.select("li");
-                for (Element local : locales) {
-                    quiniela.setLocal(String.valueOf(local));
-                }
-            }
+            // Obtiene los datos de la etiqueta <ul> en la posicion 3
             Element listaVisitantes = equipos.select("ul").get(2);
-            if (listaVisitantes != null) {
-                Elements visitantes = listaVisitantes.select("li");
-                for (Element visitante : visitantes) {
-                    quiniela.setVisitante(String.valueOf(visitante));
-                }
-            }
-        }
-        if (resultados != null) {
+            // Obtiene los datos de la etiqueta <ul> en la posicion 1
             Element listaResultados = resultados.select("ul").get(0);
-            if (listaResultados != null) {
+            if (listaLocales != null && listaVisitantes != null && listaResultados != null) {
+                // Obtiene los datos de cada <li>
+                Elements locales = listaLocales.select("li");
+                Elements visitantes = listaVisitantes.select("li");
                 Elements results = listaResultados.select("li");
-                for (Element resultado : results) {
-                    quiniela.setResultado(String.valueOf(resultado));
+                for (int i = 0; i < results.size(); i++) {
+                    // Crea un nuevo objeto y los carga en la lista de datos
+                    Quiniela quiniela = new Quiniela(locales.get(i).text(),visitantes.get(i).text(),results.get(i).text());
+                    dataList.add(quiniela);
                 }
             }
         }
-
-        dataList.add(quiniela);
-
         return dataList;
     }
 }
