@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.quinielafutbol"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.quinielafutbol"
@@ -32,6 +32,9 @@ android {
 }
 
 dependencies {
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("org.jsoup:jsoup:1.16.2")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
