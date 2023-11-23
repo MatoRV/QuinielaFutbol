@@ -25,16 +25,4 @@ public class Quiniela {
     public String getResultado() {
         return resultado;
     }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public void setVisitante(String visitante) {
-        this.visitante = visitante;
-    }
-
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
 }

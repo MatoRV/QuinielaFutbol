@@ -33,7 +33,7 @@ public class Respuesta {
             // Obtiene los datos de la etiqueta <ul> en la posicion 3
             Element listaVisitantes = equipos.select("ul").get(2);
             // Obtiene los datos de la etiqueta <ul> en la posicion 1
-            Element listaResultados = resultados.select("ul").get(0);
+            Element listaResultados = resultados.select("ul").get(1);
             if (listaLocales != null && listaVisitantes != null && listaResultados != null) {
                 // Obtiene los datos de cada <li>
                 Elements locales = listaLocales.select("li");
@@ -44,6 +44,20 @@ public class Respuesta {
                     Quiniela quiniela = new Quiniela(locales.get(i).text(),visitantes.get(i).text(),results.get(i).text());
                     dataList.add(quiniela);
                 }
+            }
+        }
+        Element plenoIzq = document.select("div.cuerpoRegionLeft").get(1);
+        Element plenoDrc = document.select("div.cuerpoRegionRight").get(1);
+        if (plenoIzq != null && plenoDrc != null) {
+            Element localPleno = plenoIzq.select("ul").get(1);
+            Element visitantePleno = plenoIzq.select("ul").get(2);
+            Element resultPleno = plenoDrc.select("ul").get(1);
+            if (localPleno != null && visitantePleno != null && resultPleno != null) {
+                Element local = localPleno.selectFirst("li");
+                Element visitante = visitantePleno.selectFirst("li");
+                Element resultado = resultPleno.selectFirst("li");
+                Quiniela quiniela = new Quiniela(local.text(),visitante.text(),resultado.text());
+                dataList.add(quiniela);
             }
         }
         return dataList;
