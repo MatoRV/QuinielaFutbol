@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         for (Quiniela q : lista) {
             mList.add(q);
         }
+        // Notifica al adaptador de los cambios en los datos
         mAdapter.notifyDataSetChanged();
     }
 
